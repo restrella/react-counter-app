@@ -4,7 +4,7 @@ export default class Counter extends Component {
   state = {
     name: "Hello World",
     image: "https://picsum.photos/200",
-    counter: 10,
+    //   counter: 10,
     tags: ["tag1", "tag2"],
   };
 
@@ -42,20 +42,9 @@ export default class Counter extends Component {
     // );
   }
 
-  handleIncrement = (increment) => {
-    // console.log("handleIncrement", this.state.counter);
-    // this.state.counter++;
-    this.setState({ counter: this.state.counter + increment });
-  };
-  handleDecrement = (decrement) => {
-    // console.log("handleIncrement", this.state.counter);
-    // this.state.counter++;
-    this.setState({ counter: this.state.counter - decrement });
-  };
-
   formatText() {
-    if (this.state.counter > 0) {
-      return this.state.counter;
+    if (this.props.counter.value > 0) {
+      return this.props.counter.value;
     }
     return "Zero/es";
   }
@@ -74,6 +63,7 @@ export default class Counter extends Component {
   //     this.handleIncrement(2);
   //   };
   render() {
+    console.log(this.props);
     return (
       //   <>
       // {/* {this.getName()} */}
@@ -86,13 +76,18 @@ export default class Counter extends Component {
         <button
           className="btn btn-primary ms-4"
           disabled={this.state.counter <= 0}
-          onClick={() => this.handleDecrement(1)}>
+          onClick={() => this.props.onDecrement(this.props.counter.id)}>
           -
         </button>
         <button
           className="btn btn-primary ms-1"
-          onClick={() => this.handleIncrement(1)}>
+          onClick={() => this.props.onIncrement(this.props.counter.id)}>
           +
+        </button>
+        <button
+          className="btn btn-primary ms-1"
+          onClick={() => this.props.onDelete(this.props.counter.id)}>
+          Delete
         </button>
       </div>
       //   </>
